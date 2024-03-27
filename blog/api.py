@@ -1,9 +1,42 @@
 from ninja import NinjaAPI, Schema
-
+from .models import Post
+from django.shortcuts import get_object_or_404
 
 api = NinjaAPI()
 
 
+@api.get("/post/{pk}")
+def getpost(request, pk: int):
+    post = get_object_or_404(Post, pk=pk)
+    return {
+        'title': post.title,
+        'text': post.text,
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+'''
 class HelloSchema(Schema):
     name: str = "World"
 
@@ -41,3 +74,4 @@ def hello(request, data: HelloSchema):
 @api.get("/math/{a}und{b}")
 def math(request, a: int, b: int):
     return f"Addition: {a + b}  Multiplication: {a * b}"
+'''
